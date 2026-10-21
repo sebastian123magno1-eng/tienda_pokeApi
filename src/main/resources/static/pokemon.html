@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="brand">
+                <span class="brand-badge">JS</span>
+                <span>Tienda &amp; PokeAPI</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Productos</a>
+                <a href="pokemon.html" class="nav-link active">Pokédex</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Encabezado limpio sin comentarios técnicos -->
+        <header class="hero-header">
+            <h1 class="hero-title">Explorador Pokémon</h1>
+            <p class="hero-subtitle">
+                Busca tu Pokémon favorito y selecciona cualquier tarjeta para ver su información detallada.
+            </p>
+        </header>
+
+        <!-- Buscador con espera de 4 segundos -->
+        <section class="search-section" aria-label="Buscador de Pokémon">
+            <div class="search-bar-wrapper">
+                <span class="search-icon">⚡</span>
+                <input
+                    type="text"
+                    id="pokemonSearchInput"
+                    class="search-input"
+                    placeholder="Buscar Pokémon por nombre o número (ej. pikachu, charizard, 25)..."
+                    autocomplete="off"
+                />
+                <button type="button" id="clearPokeSearchBtn" class="search-clear-btn" style="display: none;">
+                    Limpiar
+                </button>
+            </div>
+
+            <!-- Barra de progreso durante la espera de búsqueda -->
+            <div id="delayProgressContainer" class="delay-progress-container">
+                <div id="delayProgressBar" class="delay-progress-bar"></div>
+            </div>
+
+            <div class="search-meta">
+                <span id="delayStatusBadge" class="badge-mode delay-mode">
+                    ⏱️ Búsqueda con espera de 4s
+                </span>
+                <span id="pokeResultsCount">Cargando Pokémon...</span>
+            </div>
+        </section>
+
+        <!-- Grid Responsivo de 3 Columnas -->
+        <section id="pokemonGrid" class="cards-grid" aria-live="polite">
+            <!-- Tarjetas generadas con Vanilla JS -->
+        </section>
+    </main>
+
+    <!-- Modal de Detalle del Pokémon (en la misma página, sin cambiar de URL ni abrir otra pestaña) -->
+    <div id="pokemonDetailModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-box modal-box-large">
+            <div class="modal-body" id="pokemonDetailBody">
+                <!-- Contenido del detalle renderizado en la misma página -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/pokemon.js"></script>
+</body>
+</html>
