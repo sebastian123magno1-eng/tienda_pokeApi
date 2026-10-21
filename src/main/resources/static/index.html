@@ -1,132 +1,111 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo de Productos</title>
+    <title>Store &amp; PokeAPI | Products</title>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <!-- Barra de Navegación -->
     <nav class="navbar">
         <div class="navbar-container">
             <a href="index.html" class="brand">
                 <span class="brand-badge">JS</span>
-                <span>Tienda &amp; PokeAPI</span>
+                <span>Store &amp; PokeAPI</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link active">Productos</a>
+                <a href="index.html" class="nav-link active">Products</a>
                 <a href="pokemon.html" class="nav-link">Pokédex</a>
             </div>
         </div>
     </nav>
 
     <main class="container">
-        <!-- Encabezado principal limpio -->
         <header class="hero-header">
-            <h1 class="hero-title">Catálogo de Productos</h1>
+            <h1 class="hero-title">Product Catalog</h1>
             <p class="hero-subtitle">
-                Encuentra periféricos, monitores y accesorios. Haz clic en cualquier tarjeta para ver su información completa.
+                Find peripherals, monitors and accessories. Click any card to see its full information.
             </p>
         </header>
 
-        <!-- Buscador Instantáneo y Botones de Acción abajo de buscar -->
-        <section class="search-section" aria-label="Buscador de productos">
+        <!-- Search bar with instant filtering and action buttons -->
+        <section class="search-section" aria-label="Product search">
             <div class="search-bar-wrapper">
                 <span class="search-icon">🔍</span>
                 <input
                     type="text"
                     id="searchInput"
                     class="search-input"
-                    placeholder="Buscar producto por nombre, descripción o categoría..."
+                    placeholder="Search by name, description or category..."
                     autocomplete="off"
                 />
-                <button type="button" id="clearSearchBtn" class="search-clear-btn" style="display: none;">
-                    Limpiar
-                </button>
+                <button type="button" id="clearSearchBtn" class="search-clear-btn" hidden>Clear</button>
             </div>
             <div class="search-meta">
                 <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-                    <span class="badge-mode">⚡ Búsqueda instantánea</span>
-                    <button type="button" id="openCreateModalBtn" class="btn btn-primary btn-sm">
-                        ➕ Crear Producto
-                    </button>
-                    <button type="button" id="openEditSelectorBtn" class="btn btn-warning btn-sm">
-                        ✏️ Modificar Producto
-                    </button>
+                    <span class="badge-mode">⚡ Instant search</span>
+                    <button type="button" id="openCreateBtn" class="btn btn-primary btn-sm">➕ Create Product</button>
+                    <button type="button" id="openEditBtn" class="btn btn-warning btn-sm">✏️ Edit Product</button>
                 </div>
-                <span id="resultsCount">Cargando productos...</span>
+                <span id="resultsCount">Loading products...</span>
             </div>
         </section>
 
-        <!-- Contenedor Grid de 3 Columnas de Tarjetas -->
-        <section id="productsGrid" class="cards-grid" aria-live="polite">
-            <!-- Renderizado dinámicamente con Vanilla JS -->
-        </section>
+        <!-- 3-column responsive card grid -->
+        <section id="productsGrid" class="cards-grid" aria-live="polite"></section>
     </main>
 
-    <!-- Modal para Ver el Detalle del Producto (al aplastar la tarjeta) -->
-    <div id="productModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <!-- Product detail modal (same page) -->
+    <div id="detailModal" class="modal-overlay" role="dialog" aria-modal="true">
         <div class="modal-box">
-            <img id="modalImg" src="" alt="Imagen del producto" />
+            <img id="detailImg" src="" alt="Product image" />
             <div class="modal-body">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-                    <span id="modalCategory" class="type-tag">Categoría</span>
-                    <span id="modalPrice" class="card-price">$0.00</span>
+                    <span id="detailCategory" class="type-tag">Category</span>
+                    <span id="detailPrice" class="card-price">$0.00</span>
                 </div>
-                <h2 id="modalTitle" class="card-title" style="font-size: 1.45rem;">Nombre</h2>
-                <p id="modalDesc" style="color: var(--text-secondary); margin: 0.85rem 0 1.4rem; line-height: 1.65;"></p>
+                <h2 id="detailTitle" class="card-title" style="font-size: 1.45rem;">Name</h2>
+                <p id="detailDesc" style="color: var(--text-secondary); margin: 0.85rem 0 1.4rem; line-height: 1.65;"></p>
                 <div style="display: flex; justify-content: flex-end; gap: 0.6rem;">
-                    <button type="button" id="modalEditBtn" class="btn btn-warning">✏️ Modificar</button>
-                    <button type="button" id="closeModalBtn" class="btn btn-primary">Cerrar</button>
+                    <button type="button" id="detailEditBtn" class="btn btn-warning">✏️ Edit</button>
+                    <button type="button" id="detailCloseBtn" class="btn btn-primary">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal para Crear o Modificar un Producto -->
+    <!-- Create / edit product modal -->
     <div id="formModal" class="modal-overlay" role="dialog" aria-modal="true">
         <div class="modal-box" style="max-width: 620px;">
             <div class="modal-body">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h2 id="formModalTitle" class="card-title" style="margin: 0;">Crear Producto</h2>
-                    <button type="button" id="closeFormModalBtn" class="search-clear-btn">✕</button>
+                    <h2 id="formTitle" class="card-title" style="margin: 0;">Create Product</h2>
+                    <button type="button" id="formCloseBtn" class="search-clear-btn">✕</button>
                 </div>
 
-                <!-- Selector rápido cuando se abre desde el botón "Modificar Producto" de arriba -->
-                <div id="selectProductToEditBox" style="display: none; margin-bottom: 1rem;">
-                    <label for="selectProductToEdit" style="display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
-                        Selecciona el producto que deseas modificar:
+                <div id="editSelectorBox" style="display: none; margin-bottom: 1rem;">
+                    <label for="editSelector" style="display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                        Select the product you want to edit:
                     </label>
-                    <select id="selectProductToEdit" class="form-select"></select>
+                    <select id="editSelector" class="form-select"></select>
                 </div>
 
                 <form id="productForm" class="product-form" style="margin-top: 0;">
-                    <input type="hidden" id="prodId" />
-                    <input type="text" id="prodNombre" placeholder="Nombre del producto" required />
-                    <input type="number" id="prodPrecio" step="0.01" placeholder="Precio (ej. 99.99)" required />
-                    <input type="text" id="prodCategoria" placeholder="Categoría (ej. Periféricos)" required />
-                    <input type="url" id="prodImagen" placeholder="URL de imagen (opcional)" />
-                    <textarea
-                        id="prodDescripcion"
-                        class="full-width"
-                        rows="4"
-                        placeholder="Descripción del producto..."
-                        required
-                    ></textarea>
+                    <input type="hidden" id="productId" />
+                    <input type="text" id="productName" placeholder="Product name" required />
+                    <input type="number" id="productPrice" step="0.01" placeholder="Price (e.g. 99.99)" required />
+                    <input type="text" id="productCategory" placeholder="Category (e.g. Peripherals)" required />
+                    <input type="url" id="productImage" placeholder="Image URL (optional)" />
+                    <textarea id="productDescription" class="full-width" rows="4" placeholder="Product description..." required></textarea>
                     <div class="full-width" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
-                        <button type="button" id="cancelFormModalBtn" class="btn btn-outline">
-                            Cancelar
-                        </button>
-                        <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                            Guardar
-                        </button>
+                        <button type="button" id="formCancelBtn" class="btn btn-outline">Cancel</button>
+                        <button type="submit" id="formSubmitBtn" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="js/productos.js"></script>
+    <script type="module" src="src/products/main.js"></script>
 </body>
 </html>

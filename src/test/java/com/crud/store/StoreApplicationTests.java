@@ -1,13 +1,12 @@
-package com.crud.tienda;
+package com.crud.store;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TiendaApplicationTests {
+class StoreApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }

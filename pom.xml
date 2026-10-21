@@ -12,7 +12,7 @@
 	<artifactId>Tienda_PokeAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Tienda_PokeAPI</name>
-	<description>Tienda &amp; PokeAPI</description>
+	<description>Store &amp; PokeAPI - Vanilla JS front-end with a Spring Boot back-end</description>
 	<url/>
 	<licenses>
 		<license/>

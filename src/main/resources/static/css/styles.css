@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VARIABLES GLOBALES Y RESET
+   GLOBAL VARIABLES AND RESET
    ========================================================================== */
 :root {
     --bg-primary: #0f172a;
@@ -38,7 +38,7 @@ body {
 }
 
 /* ==========================================================================
-   NAVBAR SUPERIOR (FLEXBOX)
+   TOP NAVBAR (FLEXBOX)
    ========================================================================== */
 .navbar {
     position: sticky;
@@ -109,7 +109,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTENEDOR PRINCIPAL Y CABECERA
+   MAIN CONTAINER AND HEADER
    ========================================================================== */
 .container {
     max-width: 1240px;
@@ -139,7 +139,7 @@ body {
 }
 
 /* ==========================================================================
-   SECCIÓN DE BÚSQUEDA (SEARCH PART)
+   SEARCH SECTION
    ========================================================================== */
 .search-section {
     max-width: 760px;
@@ -232,7 +232,7 @@ body {
     border-color: rgba(250, 204, 21, 0.35);
 }
 
-/* Barra de progreso para el delay de 4 segundos en Página 2 */
+/* Progress bar for the 4-second search delay (Pokédex page) */
 .delay-progress-container {
     width: 100%;
     height: 6px;
@@ -255,20 +255,20 @@ body {
 }
 
 /* ==========================================================================
-   DISTRIBUCIÓN DE 3 COLUMNAS E IGUALDAD DE TAMAÑO (CSS GRID + FLEXBOX)
+   3-COLUMN LAYOUT WITH EQUAL-SIZE CARDS (CSS GRID + FLEXBOX)
    ========================================================================== */
 .cards-grid {
     display: grid;
-    /* Distribución exacta de 3 columnas en escritorio */
+    /* Exactly 3 columns on desktop */
     grid-template-columns: repeat(3, 1fr);
-    /* grid-auto-rows asegura que las filas estiren las tarjetas por igual */
+    /* grid-auto-rows makes every row stretch its cards equally */
     grid-auto-rows: 1fr;
     gap: 1.75rem;
     align-items: stretch;
 }
 
-/* Tarjeta con Flexbox vertical y height: 100% para que aunque la descripción
-   sea de diferente tamaño (corta o muy larga), todas midan igual en su fila */
+/* Vertical Flexbox card with height: 100% so that, even when descriptions
+   have different lengths (short or very long), all cards in a row match in size */
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -337,7 +337,7 @@ body {
     border: 1px solid var(--border-color);
 }
 
-/* Cuerpo de la tarjeta que se expande (flex: 1) para igualar alturas */
+/* Card body grows (flex: 1) so all cards have the same height */
 .card-body {
     padding: 1.35rem;
     display: flex;
@@ -353,8 +353,8 @@ body {
     text-transform: capitalize;
 }
 
-/* La descripción ocupa el espacio flexible (flex-grow: 1) empujando el pie
-   de la tarjeta siempre al fondo sin importar si tiene 1 línea o 6 líneas */
+/* The description takes the flexible space (flex-grow: 1), pushing the card
+   footer to the bottom whether the text has 1 line or 6 lines */
 .card-description {
     color: var(--text-secondary);
     font-size: 0.92rem;
@@ -388,7 +388,7 @@ body {
     color: var(--accent-primary);
 }
 
-/* Botones */
+/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -435,7 +435,7 @@ body {
 }
 
 /* ==========================================================================
-   ETIQUETAS DE TIPOS POKÉMON Y ENDPOINTS
+   POKÉMON TYPE TAGS
    ========================================================================== */
 .type-tags {
     display: flex;
@@ -481,7 +481,7 @@ body {
 }
 
 /* ==========================================================================
-   FORMULARIO RÁPIDO PARA AGREGAR PRODUCTO (PÁGINA 1)
+   PRODUCT FORM
    ========================================================================== */
 .admin-panel {
     max-width: 960px;
@@ -543,7 +543,7 @@ body {
     background: rgba(250, 204, 21, 0.3);
 }
 
-/* Modal para Ver Detalle de Producto y Pokémon */
+/* Detail modal for products and Pokémon */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -587,7 +587,7 @@ body {
 }
 
 /* ==========================================================================
-   PÁGINA DE DETALLE POKÉMON (NUEVA PESTAÑA)
+   POKÉMON DETAIL VIEW
    ========================================================================== */
 .detail-card {
     background: var(--bg-secondary);
@@ -688,10 +688,10 @@ body {
 }
 
 /* ==========================================================================
-   MEDIA QUERIES (DISEÑO RESPONSIVO)
+   MEDIA QUERIES (RESPONSIVE DESIGN)
    ========================================================================== */
 
-/* Pantallas medianas / Tablets: de 3 columnas pasa a 2 columnas */
+/* Medium screens / tablets: 3 columns become 2 */
 @media screen and (max-width: 992px) {
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -707,7 +707,7 @@ body {
     }
 }
 
-/* Pantallas pequeñas / Móviles: pasa a 1 sola columna */
+/* Small screens / phones: a single column */
 @media screen and (max-width: 640px) {
     .navbar {
         padding: 0.85rem 1rem;
