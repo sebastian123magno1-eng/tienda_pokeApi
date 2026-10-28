@@ -19,6 +19,7 @@ services:
 
   app:
     build: .
+    image: sebas11221/tienda-pokeapi:v1.0.0
     container_name: tienda_app
     restart: always
     depends_on:
